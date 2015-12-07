@@ -1,0 +1,132 @@
+﻿<Window x:Class="Biblioteka.Views.TakenBooksList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:viewModel="clr-namespace:Biblioteka.ViewModels"
+        Icon="{StaticResource WindowIcon}"
+        Title="Взети книги" Height="375" Width="710" Background="#D6FFFF" ResizeMode="NoResize">
+    <Window.DataContext>
+        <viewModel:TakenBooksListViewModel />
+    </Window.DataContext>
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="700"/>
+        </Grid.ColumnDefinitions>
+
+
+        <GroupBox Height="330"
+                  Width="690"
+                  Header="Взети книги"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Center"
+                  Grid.Row="0"
+                  Grid.Column="0"
+                  Margin="5,5,5,5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Row="0"
+                            Grid.Column="0"
+                            VerticalAlignment="Center">
+                    <TextBlock
+                           TextAlignment="Left"
+                           VerticalAlignment="Center"
+                           Foreground="#000000">Покажи:</TextBlock>
+
+                    <StackPanel  Orientation="Horizontal">
+                        <RadioButton GroupName="TakenBookChoices" 
+                                     Content="Всички" 
+                                     Command="{Binding ChangeListDataCommand}" 
+                                     CommandParameter="AllTakenBooks"
+                                     IsChecked="True"/>
+                        <TextBlock TextAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Foreground="#000000">(</TextBlock>
+                        <TextBlock TextAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Foreground="#000000" 
+                                   Text="{Binding NumberOfAllTakenBooks}"/>
+                        <TextBlock TextAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Foreground="#000000">)</TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton GroupName="TakenBookChoices" 
+                                     Content="Просрочени" 
+                                     Command="{Binding ChangeListDataCommand}" 
+                                     CommandParameter="ExpiredTakenBooks" />
+                        <TextBlock TextAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Foreground="#000000">(</TextBlock>
+                        <TextBlock TextAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Foreground="#000000" 
+                                   Text="{Binding NumberOfAllExpiredBooks}"/>
+                        <TextBlock TextAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Foreground="#000000">)</TextBlock>
+                    </StackPanel>
+                </StackPanel>
+
+                <ListView Grid.Row="1" 
+                                  Grid.Column="0"
+                                  ItemsSource="{Binding TakenBooks}"
+                                  SelectedIndex="{Binding SelectedRecord}">
+
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Заглавие" Width="140" DisplayMemberBinding="{Binding Title}"/>
+                            <GridViewColumn Header="Автор" Width="110" DisplayMemberBinding="{Binding Author}"/>
+                            <GridViewColumn Header="Взета от" Width="150" DisplayMemberBinding="{Binding ReaderName}"/>
+                            <GridViewColumn Header="Клас" Width="50" DisplayMemberBinding="{Binding ClassAndParalelka}"/>
+                            <GridViewColumn Header="Взета на" Width="100" DisplayMemberBinding="{Binding DateOfTaking, StringFormat=dd/MM/yyyy}"/>
+                            <GridViewColumn Header="Срок" Width="100" DisplayMemberBinding="{Binding DaysToDeadlineString}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Right"
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2">
+                    <Button Command="{Binding ShowReaderDetailsCommand}"
+                            IsEnabled="{Binding EnableButtons}">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{DynamicResource InfoUserImage}" />
+                                <TextBlock Text="Данни за читателя" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                    <Button Command="{Binding ShowBookDetailsCommand}"
+                            IsEnabled="{Binding EnableButtons}">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{DynamicResource InfoBookImage}" />
+                                <TextBlock Text="Данни за книгата" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+</Window>

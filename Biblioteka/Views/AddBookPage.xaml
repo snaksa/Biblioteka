@@ -1,0 +1,135 @@
+﻿<Window x:Class="Biblioteka.Views.AddBookPage"
+        x:Name="AddBookWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:viewModel="clr-namespace:Biblioteka.ViewModels"
+        Icon="{StaticResource WindowIcon}"
+        Title="Добавяне на книга" Height="320" Width="310" Background="#D6FFFF" ResizeMode="NoResize">
+    <Window.DataContext>
+        <viewModel:AddBookViewModel />
+    </Window.DataContext>
+    <Grid Margin="1,1,1,1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+        </Grid.ColumnDefinitions>
+        
+        <GroupBox Grid.Row="0" Grid.Column="0" Header="Данни за книгата" Height="Auto">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="230"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Номер:"
+                               TextAlignment="Right"
+                               VerticalAlignment="Center"
+                               Foreground="#000000"
+                               Grid.Row="0"
+                               Grid.Column="0"/>
+                <TextBox Text="{Binding SerialNumber, UpdateSourceTrigger=PropertyChanged}"
+                             TextAlignment="Left"
+                             Width="220"
+                             Grid.Row="0"
+                             Grid.Column="1"/>
+
+                <TextBlock Text="Автор:"
+                               TextAlignment="Right"
+                               VerticalAlignment="Center"
+                               Foreground="#000000"
+                               Grid.Row="1"
+                               Grid.Column="0"/>
+                <TextBox Text="{Binding Author, UpdateSourceTrigger=PropertyChanged}"
+                             TextAlignment="Left"
+                             Width="220"
+                             Grid.Row="1"
+                             Grid.Column="1"/>
+
+                <TextBlock Text="Заглавие:"
+                               TextAlignment="Right"
+                               VerticalAlignment="Center"
+                               Foreground="#000000"
+                               Grid.Row="2"
+                               Grid.Column="0"/>
+                <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"
+                             TextAlignment="Left"
+                             Width="220"
+                             Grid.Row="2"
+                             Grid.Column="1"/>
+
+                <TextBlock Text="Цена:"
+                               TextAlignment="Right"
+                               VerticalAlignment="Center"
+                               Foreground="#000000"
+                               Grid.Row="3"
+                               Grid.Column="0"/>
+                <TextBox Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}"
+                             TextAlignment="Left"
+                             Width="220"
+                             Grid.Row="3"
+                             Grid.Column="1"/>
+
+                <TextBlock Text="Жанр:"
+                               TextAlignment="Right"
+                               VerticalAlignment="Center"
+                               Foreground="#000000"
+                               Grid.Row="4"
+                               Grid.Column="0"/>
+                <ComboBox  Grid.Row="4"
+                           Grid.Column="1"
+                           Width="220" 
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           SelectedIndex="{Binding SelectedGenre, Mode=TwoWay}" 
+                           ItemsSource="{Binding Genres}">
+                </ComboBox>
+
+                <TextBlock Text="Година:"
+                               TextAlignment="Right"
+                               VerticalAlignment="Center"
+                               Foreground="#000000"
+                               Grid.Row="5"
+                               Grid.Column="0"/>
+                <TextBox Text="{Binding PublishedYear, UpdateSourceTrigger=PropertyChanged}"
+                             TextAlignment="Left"
+                             Width="220"
+                             Grid.Row="5"
+                             Grid.Column="1"/>
+
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Right"
+                            Grid.Row="6"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2">
+                    <Button Command="{Binding AddBookCommand}" CommandParameter="{Binding ElementName=AddBookWindow}">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{DynamicResource AddImage}" />
+                                <TextBlock Text="Добави книга" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                    <Button Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=AddBookWindow}">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{DynamicResource RemoveImage}" />
+                                <TextBlock Text="Откажи" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>

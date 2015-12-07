@@ -1,0 +1,161 @@
+﻿<Window x:Class="Biblioteka.Views.SettingsPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:viewModel="clr-namespace:Biblioteka.ViewModels"
+        Icon="{StaticResource WindowIcon}"
+        Title="Настройки" Height="260" Width="400" Background="#D6FFFF" ResizeMode="NoResize">
+    <Window.DataContext>
+        <viewModel:SettingsPageViewModel />
+    </Window.DataContext>
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <TabControl Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="5,5,5,5"
+                    Height="auto">
+            <TabItem Header="Категории">
+                <GroupBox Height="170"
+                          Width="350"
+                          Header="Списък с жанрове"
+                          VerticalAlignment="Top"
+                          HorizontalAlignment="Center"
+                          Margin="5,5,5,5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="140"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+
+                        <ListView Grid.Row="0" 
+                                  Grid.Column="0"
+                                  ItemsSource="{Binding AllGenres}"
+                                  SelectedIndex="{Binding SelectedGenre}">
+
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Жанр" Width="180" DisplayMemberBinding="{Binding GenreText}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                        <StackPanel Orientation="Vertical" 
+                            HorizontalAlignment="Stretch"
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2">
+                            <Button Command="{Binding RenameGenreCommand}">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{DynamicResource RenameImage}" />
+                                        <TextBlock Text="Преименувай" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            <Button Command="{Binding AddGenreCommand}">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <Image Source="{DynamicResource AddImage}" />
+                                        <TextBlock Text="Добави" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            <Button Command="{Binding RemoveGenreCommand}">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{DynamicResource RemoveImage}" />
+                                        <TextBlock Text="Премахни" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+            </TabItem>
+
+            <TabItem Header="Паралелки">
+                <GroupBox Height="170"
+                          Width="350"
+                          Header="Списък с паралелки"
+                          VerticalAlignment="Top"
+                          HorizontalAlignment="Center"
+                          Margin="5,5,5,5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="140"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+
+                        <ListView Grid.Row="0" 
+                                  Grid.Column="0"
+                                  ItemsSource="{Binding AllParalelki}"
+                                  SelectedIndex="{Binding SelectedParalelka}">
+
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Паралелки" Width="180" DisplayMemberBinding="{Binding Character}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                        <StackPanel Orientation="Vertical" 
+                            HorizontalAlignment="Stretch"
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2">
+                            <Button Command="{Binding RenameParalelkaCommand}">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{DynamicResource RenameImage}" />
+                                        <TextBlock Text="Преименувай" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            <Button Command="{Binding AddParalelkaCommand}">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{DynamicResource AddImage}" />
+                                        <TextBlock Text="Добави" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            <Button Command="{Binding RemoveParalelkaCommand}">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{DynamicResource RemoveImage}" />
+                                        <TextBlock Text="Премахни" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>

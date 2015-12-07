@@ -1,0 +1,147 @@
+﻿<Window x:Class="Biblioteka.Views.TakeBookPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:viewModel="clr-namespace:Biblioteka.ViewModels"
+        Icon="{StaticResource WindowIcon}"
+        x:Name="TakeBookWindow"
+        Title="Вземане на книга" Height="245" Width="495" Background="#D6FFFF" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Grid.Row="0"
+                  Grid.Column="0"
+                  Header="Вземане на книга"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Top"
+                  Width="475">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition  Height="35"/>
+                    <RowDefinition  Height="35"/>
+                    <RowDefinition  Height="35"/>
+                    <RowDefinition  Height="35"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="6*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" 
+                           Grid.Column="0"
+                           TextAlignment="Right"
+                           VerticalAlignment="Center"
+                           Foreground="#000000">ЕГН:</TextBlock>
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="0"
+                            Grid.Column="1">
+                    <TextBox HorizontalAlignment="Left" 
+                             Width="100"
+                             Text="{Binding ReaderEGN}"/>
+                    <Button Command="{Binding SearchReaderCommand}">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{DynamicResource SearchImage}" />
+                                <TextBlock Text="Избери" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                    <TextBlock TextAlignment="Left"
+                               VerticalAlignment="Center"
+                               Width="200"
+                               Foreground="#000000" 
+                               Text="{Binding ReaderName}" />
+                </StackPanel>
+
+                <TextBlock Grid.Row="1" 
+                           Grid.Column="0"
+                           TextAlignment="Right"
+                           VerticalAlignment="Center"
+                           Foreground="#000000">Книга:</TextBlock>
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="1"
+                            Grid.Column="1">
+                    <TextBox HorizontalAlignment="Left" 
+                             Width="100"
+                             Text="{Binding BookSerialNumber}"/>
+                    <Button Command="{Binding SearchBookCommand}">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{DynamicResource SearchImage}" />
+                                <TextBlock Text="Избери" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                    <TextBlock TextAlignment="Left"
+                               VerticalAlignment="Center"
+                               Width="200"
+                               Foreground="#000000" 
+                               Text="{Binding BookTitle}" />
+                </StackPanel>
+
+                <TextBlock Grid.Row="2" 
+                           Grid.Column="0"
+                           TextAlignment="Right"
+                           VerticalAlignment="Center"
+                           Foreground="#000000">Взета на:</TextBlock>
+                <DatePicker Grid.Row="2"
+                            Grid.Column="1"
+                            Width="390"
+                            Height="27"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            Margin="5,5,5,5" 
+                            BorderBrush="Transparent"
+                            Background="#CCEBFF"
+                            SelectedDate="{Binding DateOfTaking}"/>
+
+                <TextBlock Grid.Row="3" 
+                           Grid.Column="0"
+                           TextAlignment="Right"
+                           VerticalAlignment="Center"
+                           Foreground="#000000">Краен срок:</TextBlock>
+                <DatePicker Grid.Row="3"
+                            Grid.Column="1"
+                            Width="390"
+                            Height="27"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            Margin="5,5,5,5"
+                            BorderBrush="Transparent"
+                            Background="#CCEBFF"
+                            SelectedDate="{Binding Deadline}"/>
+
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Right"
+                            Grid.Row="5"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2">
+                    <Button Command="{Binding SaveCommand}"
+                            CommandParameter="{Binding ElementName=TakeBookWindow}">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{DynamicResource SaveChangesImage}" />
+                                <TextBlock Text="Запази" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                    <Button Command="{Binding CloseWindowCommand}"
+                            CommandParameter="{Binding ElementName=TakeBookWindow}">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{DynamicResource RemoveUserImage}" />
+                                <TextBlock Text="Откажи" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+</Window>

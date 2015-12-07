@@ -1,0 +1,87 @@
+﻿<Window x:Class="Biblioteka.Views.ArchiveBookPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:viewModel="clr-namespace:Biblioteka.ViewModels"
+        Icon="{StaticResource WindowIcon}"
+        x:Name="ArchiveBookWindow"
+        Title="Архивиране на книга" Height="175" Width="360" Background="#D6FFFF" ResizeMode="NoResize">
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        
+        <GroupBox Grid.Row="0"
+                  Grid.Column="0"
+                  Header="Архивиране на книга"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Top">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="6*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" 
+                           Grid.Column="0"
+                           TextAlignment="Right"
+                           VerticalAlignment="Center"
+                           Foreground="#000000">Номер:</TextBlock>
+                <TextBox Grid.Row="0"
+                         Grid.Column="1"
+                         HorizontalAlignment="Stretch"
+                         Text="{Binding ArchiveNumber, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Grid.Row="1" 
+                           Grid.Column="0"
+                           TextAlignment="Right"
+                           VerticalAlignment="Center"
+                           Foreground="#000000">Дата:</TextBlock>
+                <DatePicker Grid.Row="1"
+                            Grid.Column="1"
+                            Height="27"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Stretch"
+                            Margin="5,5,5,5" 
+                            BorderBrush="Transparent"
+                            Background="#CCEBFF"
+                            SelectedDate="{Binding DateOfArchivation, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Right"
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2">
+                    <Button Command="{Binding ArchiveBookCommand}"
+                            CommandParameter="{Binding ElementName=ArchiveBookWindow}">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{DynamicResource ArchiveImage}" />
+                                <TextBlock Text="Архивирай" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                    <Button Command="{Binding CloseWindowCommand}"
+                            CommandParameter="{Binding ElementName=ArchiveBookWindow}">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{DynamicResource RemoveUserImage}" />
+                                <TextBlock Text="Откажи" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+            </Grid>
+            
+        </GroupBox>
+        
+        
+    </Grid>
+</Window>

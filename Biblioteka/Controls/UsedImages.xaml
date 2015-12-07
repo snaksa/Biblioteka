@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <BitmapImage x:Key="BookImage" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="../Images/book.png"/>
+    <BitmapImage x:Key="UserImage" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="../Images/user.png"/>
+    <BitmapImage x:Key="AddUserImage" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="../Images/addUser.png"/>
+    <BitmapImage x:Key="RemoveUserImage" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="../Images/removeUser.png"/>
+    <BitmapImage x:Key="InfoUserImage" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="../Images/infoUser.png"/>
+    <BitmapImage x:Key="AddImage" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="../Images/addBook.png"/>
+    <BitmapImage x:Key="RemoveImage" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="../Images/removeBook.png"/>
+    <BitmapImage x:Key="InfoBookImage" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="../Images/infoBook.png"/>
+    <BitmapImage x:Key="TakenBooksImage" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="../Images/takenBooks.png"/>
+    <BitmapImage x:Key="LibraryImage" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="../Images/libraryPic.jpg"/>
+    <BitmapImage x:Key="SaveChangesImage" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="../Images/saveChanges.png"/>
+    <BitmapImage x:Key="GiveBackImage" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="../Images/giveBack.png"/>
+    <BitmapImage x:Key="SearchImage" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="../Images/searchImage.png"/>
+    <BitmapImage x:Key="ChooseImage" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="../Images/chooseImage.png"/>
+    <BitmapImage x:Key="ArchiveImage" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="../Images/archiveImage.png"/>
+    <BitmapImage x:Key="SettingsImage" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="../Images/settingsImage.png"/>
+    <BitmapImage x:Key="RenameImage" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="../Images/renameImage.png"/>
+    <BitmapImage x:Key="TickImage" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="../Images/tickImage.png"/>
+    <BitmapImage x:Key="WindowIcon" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="../Images/windowIcon.png"/>
+    <BitmapImage x:Key="TakenBookIcon" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="../Images/takenBook.png"/>
+    <BitmapImage x:Key="StatsIcon" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="../Images/statsImage.png"/>
+    <BitmapImage x:Key="StarIcon" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="../Images/starImage.png"/>
+    <BitmapImage x:Key="RefreshIcon" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="../Images/refreshImage.png"/>
+</ResourceDictionary>

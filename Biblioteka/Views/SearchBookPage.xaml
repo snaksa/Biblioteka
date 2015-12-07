@@ -1,0 +1,173 @@
+﻿<Window x:Class="Biblioteka.Views.SearchBookPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:viewModel ="clr-namespace:Biblioteka.ViewModels"
+        Icon="{StaticResource WindowIcon}"
+        x:Name="SearchBookWindow"
+        Title="Търсене на книга" Height="556" Width="477" Background="#D6FFFF" ResizeMode="NoResize">
+    <Window.DataContext>
+        <viewModel:SearchBookViewModel />
+    </Window.DataContext>
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="470"/>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Grid.Row="0" Grid.Column="0" Header="Търсене">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="280"/>
+                    <ColumnDefinition Width="110"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" 
+                           Grid.Column="0"
+                           TextAlignment="Right"
+                           VerticalAlignment="Center"
+                           Foreground="#000000">Търсене по:</TextBlock>
+                <StackPanel Grid.Row="0" 
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"
+                            Orientation="Horizontal">
+                    <ComboBox  Width="100" 
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           SelectedIndex="{Binding SearchBookOption, Mode=TwoWay}">
+                        <ComboBoxItem>Номер</ComboBoxItem>
+                        <ComboBoxItem>Автор</ComboBoxItem>
+                        <ComboBoxItem>Заглавие</ComboBoxItem>
+                        <ComboBoxItem>Жанр</ComboBoxItem>
+                    </ComboBox>
+                    <ComboBox  Width="267" 
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           SelectedIndex="{Binding SelectedGenre, Mode=TwoWay}"
+                           ItemsSource="{Binding Genres}"
+                           Visibility="{Binding GenresVisibility}">
+                    </ComboBox>
+                </StackPanel>
+
+                <TextBlock Grid.Row="1" 
+                           Grid.Column="0"
+                           TextAlignment="Right"
+                           VerticalAlignment="Center"
+                           Foreground="#000000">Ключ:</TextBlock>
+                <TextBox Grid.Row="1"
+                         Grid.Column="1"
+                         HorizontalAlignment="Left" 
+                         Width="270"
+                         Text="{Binding SearchValue, Mode=TwoWay}"
+                         IsEnabled="{Binding SearchValueEnabled, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Grid.Row="1" 
+                        Grid.Column="2" 
+                        Content="Търси"
+                        Width="100"
+                        Command="{Binding SearchCommand}"/>
+            </Grid>
+        </GroupBox>
+
+        <TabControl Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="5,5,5,5"
+                    SelectedIndex="{Binding SelectedTabItem}">
+            <TabItem Header="Актуални книги">
+                <GroupBox Header="Списък с актуални книги"
+                  Height="360"
+                  Width="440"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Center">
+                    <StackPanel>
+                        <ListView ItemsSource="{Binding FoundBooks}" 
+                                  SelectedIndex="{Binding SelectedBook, UpdateSourceTrigger=PropertyChanged}" 
+                                  Height="300">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Номер" Width="60" DisplayMemberBinding="{Binding SerialNumber}" />
+                                    <GridViewColumn Header="Заглавие" Width="130" DisplayMemberBinding="{Binding Title}" />
+                                    <GridViewColumn Header="Автор" Width="120" DisplayMemberBinding="{Binding Author}" />
+                                    <GridViewColumn Header="Статус" Width="85" DisplayMemberBinding="{Binding Status}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Command="{Binding ChooseBookCommand}"
+                        CommandParameter="{Binding ElementName=SearchBookWindow}"
+                        Visibility="{Binding ShowChooseButton}">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{DynamicResource ChooseImage}" />
+                                        <TextBlock Text="Избери книга" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            <Button Command="{Binding BookDetailsCommand}">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{DynamicResource InfoUserImage}" />
+                                        <TextBlock Text="Данни за книга" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            <Button Command="{Binding RefreshDataCommand}">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{DynamicResource RefreshIcon}" />
+                                        <TextBlock Text="Обнови" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+            </TabItem>
+            <TabItem Header="Архивирани книги">
+                <GroupBox Header="Списък с архивирани книги"
+                  Height="360"
+                  Width="440"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Center">
+                    <StackPanel>
+                        <ListView ItemsSource="{Binding ArchivedBooks}" SelectedIndex="{Binding SelectedArchivedBook, UpdateSourceTrigger=PropertyChanged}" Height="300">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Номер" Width="60" DisplayMemberBinding="{Binding SerialNumber}" />
+                                    <GridViewColumn Header="Заглавие" Width="130" DisplayMemberBinding="{Binding Title}" />
+                                    <GridViewColumn Header="Автор" Width="120" DisplayMemberBinding="{Binding Author}" />
+                                    <GridViewColumn Header="Статус" Width="85" DisplayMemberBinding="{Binding Status}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Command="{Binding BookDetailsCommand}">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{DynamicResource InfoUserImage}" />
+                                        <TextBlock Text="Данни за книга" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            <Button Command="{Binding RefreshDataCommand}">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{DynamicResource RefreshIcon}" />
+                                        <TextBlock Text="Обнови" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>

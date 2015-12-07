@@ -1,0 +1,238 @@
+﻿<Window x:Class="Biblioteka.Views.BookDetailsPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:viewModel="clr-namespace:Biblioteka.ViewModels"
+        Icon="{StaticResource WindowIcon}"
+        Title="Данни за книга" Height="631" Width="610" Background="#D6FFFF" ResizeMode="NoResize">
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="600"/>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Grid.Row="0"
+                  Grid.Column="0"
+                  Header="Данни за книга"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Top"
+                  Width="590">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition  Height="35"/>
+                    <RowDefinition  Height="35"/>
+                    <RowDefinition  Height="35"/>
+                    <RowDefinition  Height="35"/>
+                    <RowDefinition  Height="35"/>
+                    <RowDefinition  Height="35"/>
+                    <RowDefinition  Height="35"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="6*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" 
+                           Grid.Column="0"
+                           TextAlignment="Right"
+                           VerticalAlignment="Center"
+                           Foreground="#000000">Номер:</TextBlock>
+                <TextBox Grid.Row="0"
+                         Grid.Column="1"
+                         HorizontalAlignment="Left" 
+                         Width="480"
+                         Text="{Binding SerialNumber, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Grid.Row="1" 
+                           Grid.Column="0"
+                           TextAlignment="Right"
+                           VerticalAlignment="Center"
+                           Foreground="#000000">Автор:</TextBlock>
+                <TextBox Grid.Row="1"
+                         Grid.Column="1"
+                         HorizontalAlignment="Left" 
+                         Width="480"
+                         Text="{Binding Author, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Grid.Row="2" 
+                           Grid.Column="0"
+                           TextAlignment="Right"
+                           VerticalAlignment="Center"
+                           Foreground="#000000">Заглавие:</TextBlock>
+                <TextBox Grid.Row="2"
+                         Grid.Column="1"
+                         HorizontalAlignment="Left" 
+                         Width="480"
+                         Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Grid.Row="3" 
+                           Grid.Column="0"
+                           TextAlignment="Right"
+                           VerticalAlignment="Center"
+                           Foreground="#000000">Жанр:</TextBlock>
+                <ComboBox  Grid.Row="3"
+                           Grid.Column="1"
+                           Width="220" 
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           SelectedIndex="{Binding SelectedGenre, Mode=TwoWay}" 
+                           ItemsSource="{Binding Genres}">
+                </ComboBox>
+
+                <TextBlock Text="Статус:"
+                               TextAlignment="Right"
+                               VerticalAlignment="Center"
+                               Foreground="#000000"
+                               Grid.Row="4"
+                               Grid.Column="0"/>
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="4"
+                            Grid.Column="1">
+                    <TextBox HorizontalAlignment="Left" 
+                             Width="345"
+                             Text="{Binding BookStatus}"
+                             IsEnabled="False"/>
+                    <Button Visibility="{Binding ShowStatusButton}"
+                            Command="{Binding ShowReaderDetailsCommand}"
+                            CommandParameter="StatusButton">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{DynamicResource InfoUserImage}" />
+                                <TextBlock Text="Данни за читателя" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+                
+                <TextBlock Grid.Row="5" 
+                           Grid.Column="0"
+                           TextAlignment="Right"
+                           VerticalAlignment="Center"
+                           Foreground="#000000">Година:</TextBlock>
+                <TextBox Grid.Row="5"
+                         Grid.Column="1"
+                         HorizontalAlignment="Left" 
+                         Width="480"
+                         Text="{Binding PublishedYear, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Grid.Row="6" 
+                           Grid.Column="0"
+                           TextAlignment="Right"
+                           VerticalAlignment="Center"
+                           Foreground="#000000">Цена:</TextBlock>
+                <TextBox Grid.Row="6"
+                         Grid.Column="1"
+                         HorizontalAlignment="Left" 
+                         Width="480"
+                         Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}"/>
+
+
+
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Right"
+                            Grid.Row="7"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2">
+                    <Button IsEnabled="{Binding EnableSaveChangesButton}" 
+                            Command="{Binding SaveChangesCommand}">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{DynamicResource SaveChangesImage}" />
+                                <TextBlock Text="Запази промените" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                    <Button Command="{Binding ArchiveBookCommand}"
+                            Visibility="{Binding ShowArchiveButton}">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{DynamicResource ArchiveImage}" />
+                                <TextBlock Text="Архивирай книгата" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                    <Button Command="{Binding UnarchiveBookCommand}"
+                            Visibility="{Binding ShowUnarchiveButton}">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{DynamicResource AddImage}" />
+                                <TextBlock Text="Възстановяване на книгата" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+
+        <GroupBox Height="270"
+                  Width="590"
+                  Header="Списък с всички читатели, които са взели книгата"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Center"
+                  Grid.Row="1"
+                  Grid.Column="0"
+                  Margin="5,5,5,5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+                <ListView Grid.Row="0" 
+                                  Grid.Column="0"
+                                  ItemsSource="{Binding BookReaders}"
+                                  SelectedIndex="{Binding SelectedBookReader}">
+
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ЕГН" Width="120" DisplayMemberBinding="{Binding ReaderEGN}"/>
+                            <GridViewColumn Header="Име" Width="200" DisplayMemberBinding="{Binding ReaderName}"/>
+                            <GridViewColumn Header="Клас" Width="50" DisplayMemberBinding="{Binding ClassAndParalelka}"/>
+                            <GridViewColumn Header="Взета на" Width="100" DisplayMemberBinding="{Binding DateOfTaking, StringFormat=dd/MM/yyyy}"/>
+                            <GridViewColumn Header="Върната на" Width="100" DisplayMemberBinding="{Binding DateOfReturn, StringFormat=dd/MM/yyyy}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Right"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2">
+                    <Button Command="{Binding ShowReaderDetailsCommand}"
+                            CommandParameter="ListButton">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{DynamicResource InfoUserImage}" />
+                                <TextBlock Text="Данни за читателя" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                    <Button Command="{Binding RefreshDataCommand}">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{DynamicResource RefreshIcon}" />
+                                <TextBlock Text="Обнови" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+</Window>

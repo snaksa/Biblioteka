@@ -1,0 +1,319 @@
+﻿<Window x:Class="Biblioteka.Views.ReaderDetailsPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:viewModel="clr-namespace:Biblioteka.ViewModels"
+        Icon="{StaticResource WindowIcon}"
+        x:Name="ReaderDetailsWindow"
+        Title="Данни за читателя" Height="642" Width="610" Background="#D6FFFF" ResizeMode="NoResize">
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="600"/>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Grid.Row="0"
+                  Grid.Column="0"
+                  Header="Данни за читателя"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Top"
+                  Width="590">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition  Height="35"/>
+                    <RowDefinition  Height="35"/>
+                    <RowDefinition  Height="35"/>
+                    <RowDefinition  Height="35"/>
+                    <RowDefinition  Height="35"/>
+                    <RowDefinition  Height="35"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="6*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" 
+                           Grid.Column="0"
+                           TextAlignment="Right"
+                           VerticalAlignment="Center"
+                           Foreground="#000000">ЕГН:</TextBlock>
+                <TextBox Grid.Row="0"
+                         Grid.Column="1"
+                         HorizontalAlignment="Left" 
+                         Width="480"
+                         Text="{Binding EGN, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Grid.Row="1" 
+                           Grid.Column="0"
+                           TextAlignment="Right"
+                           VerticalAlignment="Center"
+                           Foreground="#000000">Име:</TextBlock>
+                <TextBox Grid.Row="1"
+                         Grid.Column="1"
+                         HorizontalAlignment="Left" 
+                         Width="480"
+                         Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Grid.Row="2" 
+                           Grid.Column="0"
+                           TextAlignment="Right"
+                           VerticalAlignment="Center"
+                           Foreground="#000000">Адрес:</TextBlock>
+                <TextBox Grid.Row="2"
+                         Grid.Column="1"
+                         HorizontalAlignment="Left" 
+                         Width="480"
+                         Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Grid.Row="3" 
+                           Grid.Column="0"
+                           TextAlignment="Right"
+                           VerticalAlignment="Center"
+                           Foreground="#000000">Номер:</TextBlock>
+                <TextBox Grid.Row="3"
+                         Grid.Column="1"
+                         HorizontalAlignment="Left" 
+                         Width="480"
+                         Text="{Binding SerialNumber, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Text="Длъжност:"
+                               TextAlignment="Right"
+                               VerticalAlignment="Center"
+                               Foreground="#000000"
+                               Grid.Row="4"
+                               Grid.Column="0"/>
+                <StackPanel Grid.Row="4"
+                            Grid.Column="1"
+                            Orientation="Horizontal"
+                            Margin="1,0,0,0">
+                    <ComboBox  Width="100" 
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               SelectedIndex="{Binding SelectedPosition, Mode=TwoWay}">
+                        <ComboBoxItem>Ученик</ComboBoxItem>
+                        <ComboBoxItem>Учител</ComboBoxItem>
+                    </ComboBox>
+                    <ComboBox  Width="100" 
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               SelectedIndex="{Binding SelectedClass, Mode=TwoWay}"
+                               Visibility="{Binding ShowClassChoice}">
+                        <ComboBoxItem>1</ComboBoxItem>
+                        <ComboBoxItem>2</ComboBoxItem>
+                        <ComboBoxItem>3</ComboBoxItem>
+                        <ComboBoxItem>4</ComboBoxItem>
+                        <ComboBoxItem>5</ComboBoxItem>
+                        <ComboBoxItem>6</ComboBoxItem>
+                        <ComboBoxItem>7</ComboBoxItem>
+                        <ComboBoxItem>8</ComboBoxItem>
+                        <ComboBoxItem>9</ComboBoxItem>
+                        <ComboBoxItem>10</ComboBoxItem>
+                        <ComboBoxItem>11</ComboBoxItem>
+                        <ComboBoxItem>12</ComboBoxItem>
+                    </ComboBox>
+                    <ComboBox  Width="92" 
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               SelectedIndex="{Binding SelectedParalelka, Mode=TwoWay}"
+                               ItemsSource="{Binding ParalelkiOptions}"
+                               Visibility="{Binding ShowClassChoice}">
+                        <!--<ComboBoxItem>а</ComboBoxItem>
+                        <ComboBoxItem>б</ComboBoxItem>
+                        <ComboBoxItem>в</ComboBoxItem>-->
+                    </ComboBox>
+                </StackPanel>
+                
+                <TextBlock Grid.Row="5" 
+                           Grid.Column="0"
+                           TextAlignment="Right"
+                           VerticalAlignment="Center"
+                           Foreground="#000000">Добавен на:</TextBlock>
+                <TextBox Grid.Row="5"
+                         Grid.Column="1"
+                         HorizontalAlignment="Left" 
+                         Width="480"
+                         Text="{Binding DateOfCreation, StringFormat=dd/MM/yyyy}"
+                         IsEnabled="False"/>
+
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Right"
+                            Grid.Row="6"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2">
+                    <Button IsEnabled="{Binding EnableSaveChangesButton}" Command="{Binding SaveChangesCommand}">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{DynamicResource SaveChangesImage}" />
+                                <TextBlock Text="Запази промените" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                    <Button Command="{Binding RemoveReaderCommand}" CommandParameter="{Binding ElementName=ReaderDetailsWindow}">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{DynamicResource RemoveUserImage}" />
+                                <TextBlock Text="Премахни читател" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+        <TabControl Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="5,5,5,5">
+            <TabItem Header="Взети книги">
+                <GroupBox Header="Списък с всички взети книги"
+                          Height="270"
+                          Width="570"
+                          VerticalAlignment="Top"
+                          HorizontalAlignment="Center">
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="200"/>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+
+                        <ListView Grid.Row="0" 
+                                  Grid.Column="0"
+                                  ItemsSource="{Binding TakenBooks}"
+                                  SelectedIndex="{Binding SelectedTakenBook, UpdateSourceTrigger=PropertyChanged}">
+
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Заглавие" Width="150" DisplayMemberBinding="{Binding Title}"/>
+                                    <GridViewColumn Header="Автор" Width="140" DisplayMemberBinding="{Binding Author}"/>
+                                    <GridViewColumn Header="Взета на" Width="80" DisplayMemberBinding="{Binding DateOfTaking, StringFormat=dd/MM/yyyy}"/>
+                                    <GridViewColumn Header="Краен срок" Width="80" DisplayMemberBinding="{Binding Deadline, StringFormat=dd/MM/yyyy}"/>
+                                    <GridViewColumn Header="Срок" Width="75" DisplayMemberBinding="{Binding DaysToDeadlineString}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                        <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Right"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2">
+                            <Button Command="{Binding TakeBookCommand}">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{DynamicResource AddImage}" />
+                                        <TextBlock Text="Вземане на нова книга" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            <Button Command="{Binding ReturnBookCommand}">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{DynamicResource GiveBackImage}" />
+                                        <TextBlock Text="Връщане на книга" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            <Button Command="{Binding BookDetailsCommand}"
+                                    CommandParameter="Taken">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{DynamicResource InfoBookImage}" />
+                                        <TextBlock Text="Данни за книга" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            <Button Command="{Binding RefreshDataCommand}"
+                                    CommandParameter="Taken">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{DynamicResource RefreshIcon}" />
+                                        <TextBlock Text="Обнови" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+            </TabItem>
+            <TabItem Header="Върнати книги">
+                <GroupBox Header="Списък с всички върнати книги"
+                          Width="570"
+                          Height="270"
+                          VerticalAlignment="Top"
+                          HorizontalAlignment="Center">
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="200"/>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+
+                        <ListView Grid.Row="0" 
+                                  Grid.Column="0"
+                                  ItemsSource="{Binding ReturnedBooks}"
+                                  SelectedIndex="{Binding SelectedReturnedBook, UpdateSourceTrigger=PropertyChanged}">
+                            
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Заглавие" Width="150" DisplayMemberBinding="{Binding Title}" />
+                                    <GridViewColumn Header="Автор" Width="140" DisplayMemberBinding="{Binding Author}"/>
+                                    <GridViewColumn Header="Взета на" Width="80" DisplayMemberBinding="{Binding DateOfTaking, StringFormat=dd/MM/yyyy}" />
+                                    <GridViewColumn Header="Върната на" Width="80" DisplayMemberBinding="{Binding DateOfReturn, StringFormat=dd/MM/yyyy}" />
+                                    <GridViewColumn Header="Навреме" Width="75" DisplayMemberBinding="{Binding ReturnedOnTime}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                        <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Right"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2">
+                            <Button Command="{Binding BookDetailsCommand}"
+                                    CommandParameter="Returned">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{DynamicResource InfoBookImage}" />
+                                        <TextBlock Text="Данни за книга" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            <Button Command="{Binding RefreshDataCommand}"
+                                    CommandParameter="Taken">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{DynamicResource RefreshIcon}" />
+                                        <TextBlock Text="Обнови" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>
