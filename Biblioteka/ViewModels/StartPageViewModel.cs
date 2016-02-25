@@ -222,7 +222,7 @@ namespace Biblioteka.ViewModels
         //            mail.Body = body;
         //            SmtpServer.Port = 587;
         //            SmtpServer.UseDefaultCredentials = false;
-        //            SmtpServer.Credentials = new System.Net.NetworkCredential("snaksa2@live.com", "6703315158");
+        //            SmtpServer.Credentials = new System.Net.NetworkCredential("snaksa2@live.com", "***");
         //            SmtpServer.EnableSsl = true;
 
         //            string attachmentFilename = "Library.accdb";
